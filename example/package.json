@@ -1,0 +1,53 @@
+{
+  "name": "boilerplate",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "neutrino build",
+    "start": "neutrino start",
+    "inspect": "neutrino start --inspect",
+    "lint": "neutrino lint",
+    "test": "neutrino test",
+    "graphiql": "babel-node --presets=env ./src/graphql/graphiql.js"
+  },
+  "devDependencies": {
+    "@neutrinojs/airbnb": "^8.2.3",
+    "@neutrinojs/eslint": "^8.2.3",
+    "@neutrinojs/jest": "^8.2.3",
+    "@neutrinojs/react": "^8.2.3",
+    "@neutrinojs/style-loader": "^8.2.3",
+    "babel-cli": "^6.26.0",
+    "babel-plugin-module-resolver": "^2.7.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-flow": "^6.23.0",
+    "deepmerge": "^2.1.1",
+    "eslint": "^4.19.1",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-flowtype": "^2.48.0",
+    "express": "^4.16.3",
+    "express-graphql": "^0.6.12",
+    "neutrino": "^8.2.3",
+    "node-sass": "^4.9.0",
+    "prettier": "^1.13.2",
+    "sass-loader": "^7.0.1"
+  },
+  "dependencies": {
+    "i18next": "^11.3.2",
+    "i18next-browser-languagedetector": "^2.2.0",
+    "i18next-xhr-backend": "^1.5.1",
+    "json-schema-ref-parser": "^5.0.3",
+    "prop-types": "^15.6.1",
+    "react": "^16.4.0",
+    "react-apollo": "^2.1.6",
+    "react-burger-menu": "^2.4.4",
+    "react-dom": "^16.4.0",
+    "react-final-form": "^3.4.2",
+    "react-final-form-arrays": "^1.0.6",
+    "react-hot-loader": "^4.2.0",
+    "react-i18next": "^7.7.0",
+    "react-router-dom": "^4.2.2",
+    "react-select": "^1.2.1",
+    "resize": "https://github.com/studyjan/resize#8d1926d80333da00b88ac95d0ab9cac3f724a514"
+  }
+}

@@ -1,0 +1,44 @@
+@import "colors";
+
+$buttonColors: (
+  'primary': (
+    'normal': $brandColor-primary,
+    'hover': $brandColor-primary,
+    'active': darken($brandColor-primary, 2%),
+    'color': $textColor-buttons-primary,
+    'colorHover': $textColor-buttons-primary,
+    'border': $brandColor-primary,
+    'borderHover': $brandColor-primary,
+    'borderActice': darken($brandColor-primary, 2%),
+  ),
+  'secondary': (
+    'normal': $brandColor-secondary,
+    'hover': darken($brandColor-secondary, 3%),
+    'active': darken($brandColor-secondary, 6%),
+    'color': $textColor-buttons-muted,
+    'colorHover': $textColor-buttons-muted,
+    'border': $brandColor-secondary,
+    'borderHover': darken($brandColor-secondary, 3%),
+    'borderActice': darken($brandColor-secondary, 8%),
+  ),
+  'empty': (
+    'normal': transparent,
+    'hover': transparent,
+    'active': transparent,
+    'color': $textColor-base,
+    'colorHover': $textColor-base,
+    'border': $borderColor-btn-empty,
+    'borderHover': $brandColor-primary,
+    'borderActice': darken($brandColor-primary, 3%),
+  ),
+  'disabled': (
+    'normal': $bgColor-btn-disabled,
+    'hover': $bgColor-btn-disabled,
+    'active': $bgColor-btn-disabled,
+    'color': $textColor-inverted,
+    'colorHover': $textColor-inverted,
+    'border': $bgColor-btn-disabled,
+    'borderHover': $bgColor-btn-disabled,
+    'borderActice': $bgColor-btn-disabled,
+  ),
+);

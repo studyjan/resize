@@ -1,0 +1,58 @@
+@import "variables/fonts"
+@import "variables/colors"
+
+
+html
+  height: 100%
+
+body
+  height: 100%
+  font-family: $fontFamily-base
+  font-size: $fontSize-base
+  line-height: $lineHeight-base
+  color: $textColor-base
+  background-color: $bgColor
+  text-rendering: optimizeLegibility !important
+  font-smoothing: antialiased !important
+  -webkit-font-smoothing: antialiased !important
+  -moz-osx-font-smoothing: grayscale
+  filter: 'progid:DXImageTransform.Microsoft.AlphaImageLoader(src=hIEfix.png,sizingMethod=crop)' !important
+  font-smooth: always
+  text-decoration-skip: ink
+  margin: 0
+
+#root
+  height: 100%
+  position: relative
+  z-index: 0
+
+input,
+button,
+select,
+textarea
+  font-family: inherit
+  font-size: inherit
+  line-height: inherit
+
+button:focus
+  outline: none
+
+hr
+  border: 0
+  border-top: 1px solid $borderColor-hr
+
+
+h1, h2, h3, h4, h5, h6
+  margin: 0
+
+
+a
+  border: none
+  background: none
+  padding: 0
+  margin: 0
+  box-shadow: none
+
+svg[role=img]
+  width: 100%
+  height: 100%
