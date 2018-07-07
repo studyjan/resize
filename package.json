@@ -1,6 +1,6 @@
 {
   "name": "resize",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "lib/index.js",
   "repository": "xxxx",
   "author": "Jan Vonka <studyjan@gmail.com>",
@@ -9,7 +9,8 @@
     "clean": "rimraf lib/",
     "build": "npm run clean && node ./node_modules/babel-cli/bin/babel src/ --out-dir lib --copy-files",
     "build:watch": "npm run clean && node ./node_modules/babel-cli/bin/babel src/ --out-dir lib --watch --copy-files",
-    "example": "yarn install && cd example && yarn install && yarn start"
+    "example": "yarn install && cd example && yarn install && yarn start",
+    "test": "mocha"
   },
   "dependencies": {
     "classnames": "^2.2.5",
@@ -31,6 +32,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "cross-env": "^3.1.4",
+    "mocha": "^5.2.0",
     "rimraf": "^2.6.1"
   }
 }
