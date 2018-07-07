@@ -27,7 +27,7 @@ const blissModule = (moduleName, modifiers = false, classes = false) => {
 };
 
 const blissElement = (moduleName, elementName, modifiers = false, classes = false) => {
-    return item(`${moduleName}-${elementName}`, modifiers, classes);
+    return item(`${moduleName}-${typeof elementName === "string" ? elementName : undefined}`, modifiers, classes);
 };
 
 export const bm = blissModule;
