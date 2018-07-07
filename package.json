@@ -8,14 +8,15 @@
   "scripts": {
     "clean": "rimraf lib/",
     "build": "npm run clean && node ./node_modules/babel-cli/bin/babel src/ --out-dir lib --copy-files",
-    "build:watch": "npm run clean && node ./node_modules/babel-cli/bin/babel src/ --out-dir lib --watch --copy-files"
+    "build:watch": "npm run clean && node ./node_modules/babel-cli/bin/babel src/ --out-dir lib --watch --copy-files",
+    "example": "yarn install && cd example && yarn install && yarn start"
   },
   "dependencies": {
-    "lodash": "^4.17.10",
+    "classnames": "^2.2.5",
     "prop-types": "^15.6.0",
     "recompose": "^0.27.1",
-    "tcomb-validation": "^3.3.0",
-    "urijs": "^1.18.10"
+    "react": "^15.6.0",
+    "react-dom": "^15.6.0"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
@@ -31,11 +32,5 @@
     "babel-preset-stage-0": "^6.24.1",
     "cross-env": "^3.1.4",
     "rimraf": "^2.6.1"
-  },
-  "peerDependencies": {
-    "classnames": "^2.2.5",
-    "react": "^15.6.0",
-    "react-dom": "^15.6.0",
-    "tcomb": "^3.2.20"
   }
 }

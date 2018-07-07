@@ -3,7 +3,7 @@ import React, { Fragment } from 'react';
 import ExampleScreen from 'screens/ExampleScreen';
 
 
-import 'stylesheets/index.sass';
+import 'stylesheets/index.scss';
 
 const App = () => (
 	<Fragment>

@@ -1,9 +1,10 @@
 import React from 'react';
-import { isFunction } from 'lodash';
-import { compose, pure, withHandlers, withState, lifecycle } from 'recompose';
+import T from 'prop-types';
+import { compose, pure, withHandlers, withState, withProps, lifecycle } from 'recompose';
 
 import { bm, be } from '../../utils/bliss';
 import './index.sass';
+
 
 const MODULE_NAME = 'Resize';
 
@@ -18,29 +19,32 @@ const withResize = compose(
 			initWidth,
 			contentRef,
 		}) => (event) => {
-			setContentWidth(initWidth + event.clientX);
+			setContentWidth(Math.max(0, initWidth + event.clientX)); // minimum width 0
 		},
 	}),
 	withHandlers({
 		handleStopResize: ({
 			contentRef,
-			resizing,
 			setResizing,
 			onStopResize,
 
 			handleResize,
-		}) => (event) => {
-			if (resizing) {
-				if (isFunction(onStopResize)) {
-					onStopResize({
-						width: contentRef.style.width,
-					});
-				}
-				setResizing(false);
-
-				window.removeEventListener('mousemove', handleResize, false);
+		}) => () => {
+			if (onStopResize && typeof onStopResize === "function") { // callback on stop resize
+				onStopResize({
+					width: contentRef.style.width,
+					height: contentRef.style.height,
+				});
 			}
+			setResizing(false);
+
+			window.removeEventListener('mousemove', handleResize, false);
 		},
+	}),
+	withProps(({ resizing, handleStopResize }) => {
+		if (!resizing) {
+			window.removeEventListener('mouseup', handleStopResize, false);
+		}
 	}),
 	withHandlers({
 		handleStartResize: ({
@@ -51,14 +55,16 @@ const withResize = compose(
 			handleResize,
 			handleStopResize
 		}) => (event) => {
-			const startX = event.clientX;
-			const startWidth = parseInt(contentRef.style.width);
+			if (event.nativeEvent.which === 1) { // left click
+				const startX = event.clientX;
+				const startWidth = parseInt(contentRef.clientWidth);
 
-			setInitWidth(startWidth - startX);
-			setResizing(1);
+				setInitWidth(startWidth - startX);
+				setResizing(1);
 
-			window.addEventListener('mousemove', handleResize, false);
-			window.addEventListener('mouseup', handleStopResize, false);
+				window.addEventListener('mousemove', handleResize, false);
+				window.addEventListener('mouseup', handleStopResize, false);
+			}
 		},
 	}),
 	lifecycle({
@@ -73,14 +79,22 @@ const withResize = compose(
 const renderResize = ({
 	children,
 	handleStartResize,
-
+	resizing,
 	setContentRef,
-	contentWidth = 100,
+	height,
+	width = 0,
+	contentWidth = width,
+	maxWidth,
+	minWidth,
+	className,
 }) => (
 	<div
-		className={bm(MODULE_NAME)}
+		className={bm(MODULE_NAME, { resizing }, className)}
 		style={{
 			width: contentWidth,
+			height,
+			maxWidth,
+			minWidth,
 		}}
 		ref={setContentRef}
 	>
@@ -95,5 +109,14 @@ const renderResize = ({
 );
 
 const Resize = withResize(renderResize);
+
+Resize.propTypes = {
+	width: T.oneOfType([T.number, T.string]),
+	height: T.oneOfType([T.number, T.string]),
+	maxWidth: T.oneOfType([T.number, T.string]),
+	minWidth: T.oneOfType([T.number, T.string]),
+	className: T.oneOfType([T.string, T.array, T.object]),
+	onStopResize: T.func,
+};
 
 export default Resize;

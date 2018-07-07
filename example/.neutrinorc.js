@@ -1,4 +1,4 @@
-const path = require('path')
+const path = require('path');
 
 module.exports = {
 	use: [
@@ -26,13 +26,13 @@ module.exports = {
 		neutrino => {
 			neutrino.config.module
 				.rule('compile')
-				.use('babel')
+				.use('babel');
 
-			neutrino.config.resolve.alias.set('utils', path.resolve(__dirname, 'src/utils'))
-			neutrino.config.resolve.alias.set('screens', path.resolve(__dirname, 'src/screens'))
-			neutrino.config.resolve.alias.set('decorators', path.resolve(__dirname, 'src/decorators'))
-			neutrino.config.resolve.alias.set('components', path.resolve(__dirname, 'src/components'))
-			neutrino.config.resolve.alias.set('stylesheets', path.resolve(__dirname, 'src/stylesheets'))
+			neutrino.config.resolve.alias.set('utils', path.resolve(__dirname, 'src/utils'));
+			neutrino.config.resolve.alias.set('screens', path.resolve(__dirname, 'src/screens'));
+			neutrino.config.resolve.alias.set('decorators', path.resolve(__dirname, 'src/decorators'));
+			neutrino.config.resolve.alias.set('components', path.resolve(__dirname, 'src/components'));
+			neutrino.config.resolve.alias.set('stylesheets', path.resolve(__dirname, 'src/stylesheets'));
 		},
 	],
 }
