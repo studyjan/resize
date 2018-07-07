@@ -1,6 +1,6 @@
 {
   "name": "resize",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "lib/index.js",
   "repository": "xxxx",
   "author": "Jan Vonka <studyjan@gmail.com>",
