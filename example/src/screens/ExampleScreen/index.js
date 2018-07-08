@@ -157,14 +157,14 @@ const renderExampleScreen = ({
 				<Fragment>
 					<ExampleWrapper absolute style={{ height: '100%' }}>
 						<Resize
-							onStopResize={({ width }) => { console.log(width) }}
+							onStopResize={(props) => { console.log(props) }}
 							width={'50%'}
 						>
 							<ExampleFill />
 							<pre>
 								&lt;Resize
 								<br />
-								&nbsp;&nbsp;onStopResize=&#123;(&#123; width &#125;) => &#123; console.log(width) &#125;&#125;
+								&nbsp;&nbsp;onStopResize=&#123;(props) => &#123; console.log(props) &#125;&#125;
 								<br />
 								&nbsp;&nbsp;width=&#123;'50%'&#125;
 								<br />

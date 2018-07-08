@@ -7,20 +7,27 @@
   "license": "MIT",
   "scripts": {
     "clean": "rimraf lib/",
-    "build": "npm run clean && node ./node_modules/babel-cli/bin/babel src/ --out-dir lib --copy-files",
-    "build:watch": "npm run clean && node ./node_modules/babel-cli/bin/babel src/ --out-dir lib --watch --copy-files",
+    "build": "npm run clean && node ./node_modules/babel-cli/bin/babel src/ --out-dir lib --ignore *.test.js --copy-files",
+    "build:watch": "npm run clean && node ./node_modules/babel-cli/bin/babel src/ --out-dir lib --ignore *.test.js --watch --copy-files",
     "example": "yarn install && cd example && yarn install && yarn start",
-    "test": "mocha"
+    "test": "jest"
+  },
+  "jest": {
+    "setupTestFrameworkScriptFile": "<rootDir>/setUpTests.js",
+    "moduleNameMapper": {
+      "^.+\\.(css|less|sass|scss)$": "babel-jest"
+    }
   },
   "dependencies": {
     "classnames": "^2.2.5",
     "prop-types": "^15.6.0",
-    "recompose": "^0.27.1",
     "react": "^15.6.0",
-    "react-dom": "^15.6.0"
+    "react-dom": "^15.6.0",
+    "recompose": "^0.27.1"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
+    "babel-jest": "^23.2.0",
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-plugin-lodash": "^3.2.11",
     "babel-plugin-module-resolver": "^2.7.0",
@@ -32,7 +39,10 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "cross-env": "^3.1.4",
-    "mocha": "^5.2.0",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-15": "^1.0.5",
+    "jest": "^23.3.0",
+    "react-test-renderer": "^15.5.0",
     "rimraf": "^2.6.1"
   }
 }
