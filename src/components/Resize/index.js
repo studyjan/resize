@@ -1,4 +1,6 @@
 import React from 'react';
+
+
 import T from 'prop-types';
 import { compose, pure, withHandlers, withState, withProps, lifecycle } from 'recompose';
 
@@ -8,7 +10,7 @@ import './index.sass';
 
 const MODULE_NAME = 'Resize';
 
-const withResize = compose(
+export const withResize = compose(
 	withState('contentWidth', 'setContentWidth'),
 	withState('contentRef', 'setContentRef'),
 	withState('initWidth', 'setInitWidth', 0),
@@ -32,8 +34,8 @@ const withResize = compose(
 		}) => () => {
 			if (onStopResize && typeof onStopResize === "function") { // callback on stop resize
 				onStopResize({
-					width: contentRef.style.width,
-					height: contentRef.style.height,
+					width: contentRef.clientWidth,
+					height: contentRef.clientHeight,
 				});
 			}
 			setResizing(false);
@@ -76,7 +78,7 @@ const withResize = compose(
 	pure,
 );
 
-const renderResize = ({
+export const renderResize = ({
 	children,
 	handleStartResize,
 	resizing,
