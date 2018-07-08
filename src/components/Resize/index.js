@@ -84,7 +84,7 @@ export const renderResize = ({
 	resizing,
 	setContentRef,
 	height,
-	width = 0,
+	width = 'auto',
 	contentWidth = width,
 	maxWidth,
 	minWidth,
