@@ -5,13 +5,12 @@ import { bm, be } from 'resize/lib/utils/bliss';
 import Resize from 'resize/lib/components/Resize';
 
 import Button from 'components/Button';
-
 import ExampleWrapper from 'components/ExampleWrapper';
 import ExampleFill from 'components/ExampleFill';
 
 import image from './img/example.jpg';
-
 import './index.sass';
+
 
 const MODULE_NAME = 'ExampleScreen';
 

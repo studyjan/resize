@@ -1,6 +1,4 @@
 import React from 'react';
-
-
 import T from 'prop-types';
 import { compose, pure, withHandlers, withState, withProps, lifecycle } from 'recompose';
 
