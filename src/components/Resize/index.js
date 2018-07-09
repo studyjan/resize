@@ -1,6 +1,6 @@
 import React from 'react';
 import T from 'prop-types';
-import { compose, pure, withHandlers, withState, withProps, lifecycle } from 'recompose';
+import { compose, pure, withHandlers, withState, lifecycle } from 'recompose';
 
 import { bm, be } from '../../utils/bliss';
 import './index.sass';
@@ -10,27 +10,29 @@ const MODULE_NAME = 'Resize';
 
 export const withResize = compose(
 	withState('contentWidth', 'setContentWidth'),
-	withState('contentRef', 'setContentRef'),
-	withState('initWidth', 'setInitWidth', 0),
 	withState('resizing', 'setResizing', 0),
-	withHandlers({
-		handleResize: ({
-			setContentWidth,
-			initWidth,
-			contentRef,
-		}) => (event) => {
-			setContentWidth(Math.max(0, initWidth + event.clientX)); // minimum width 0
-		},
-	}),
-	withHandlers({
-		handleStopResize: ({
-			contentRef,
-			setResizing,
-			onStopResize,
+	withHandlers(({ setResizing, onStopResize, setContentWidth }) => {
+		let contentRef;
+		let initWidth;
 
-			handleResize,
-		}) => () => {
-			if (onStopResize && typeof onStopResize === "function") { // callback on stop resize
+		const handleContentRef = () => (ref) => {
+			if (!contentRef) {
+				contentRef = ref;
+			}
+		};
+
+		const handleResizeFunc = (event) => {
+			setContentWidth(Math.max(0, initWidth + event.clientX)); // minimum width 0
+		};
+
+		const handleUnbindEventsFunc = () => {
+			window.removeEventListener('mousemove', handleResizeFunc, false);
+			window.removeEventListener('mouseup', handleStopResizeFunc, false);
+		};
+		const handleUnbindEvents = () => handleUnbindEventsFunc;
+
+		const handleStopResizeFunc = () => {
+			if (typeof onStopResize === "function") { // callback on stop resize
 				onStopResize({
 					width: contentRef.clientWidth,
 					height: contentRef.clientHeight,
@@ -38,39 +40,32 @@ export const withResize = compose(
 			}
 			setResizing(false);
 
-			window.removeEventListener('mousemove', handleResize, false);
-		},
-	}),
-	withProps(({ resizing, handleStopResize }) => {
-		if (!resizing) {
-			window.removeEventListener('mouseup', handleStopResize, false);
-		}
-	}),
-	withHandlers({
-		handleStartResize: ({
-			setInitWidth,
-			setResizing,
-			contentRef,
+			handleUnbindEventsFunc();
+		};
 
-			handleResize,
-			handleStopResize
-		}) => (event) => {
+		const handleStartResize = ({ setResizing }) => (event) => {
 			if (event.nativeEvent.which === 1) { // left click
 				const startX = event.clientX;
 				const startWidth = parseInt(contentRef.clientWidth);
 
-				setInitWidth(startWidth - startX);
-				setResizing(1);
+				initWidth = startWidth - startX;
+				setResizing(true);
 
-				window.addEventListener('mousemove', handleResize, false);
-				window.addEventListener('mouseup', handleStopResize, false);
+				window.addEventListener('mousemove', handleResizeFunc, false);
+				window.addEventListener('mouseup', handleStopResizeFunc, false);
 			}
-		},
+		};
+
+		return {
+			handleStartResize,
+			handleContentRef,
+
+			handleUnbindEvents,
+		}
 	}),
 	lifecycle({
 		componentWillUnmount() {
-			window.removeEventListener('mousemove', this.props.handleResize, false);
-			window.removeEventListener('mouseup', this.props.handleStopResize, false);
+			this.props.handleUnbindEvents();
 		}
 	}),
 	pure,
@@ -80,7 +75,7 @@ export const renderResize = ({
 	children,
 	handleStartResize,
 	resizing,
-	setContentRef,
+	handleContentRef,
 	height,
 	width = 'auto',
 	contentWidth = width,
@@ -96,7 +91,7 @@ export const renderResize = ({
 			maxWidth,
 			minWidth,
 		}}
-		ref={setContentRef}
+		ref={handleContentRef}
 	>
 		<div className={be(MODULE_NAME, 'content')}>
 			{children}
