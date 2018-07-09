@@ -1,6 +1,6 @@
 {
   "name": "resize",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "main": "lib/components/Resize/index.js",
   "repository": "https://github.com/studyjan/resize",
   "author": "Jan Vonka <studyjan@gmail.com>",
